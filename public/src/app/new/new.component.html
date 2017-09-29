@@ -1,0 +1,47 @@
+<div>
+  <h1>New Appointment</h1>
+
+  <form (submit)="onSubmit()" #formValidation="ngForm">
+    <label>Date:</label>
+    <input 
+    type="date"
+    name="date"
+    required
+    [(ngModel)]="appointment.date"
+    #date="ngModel">
+    <span *ngIf="date.invalid && date.touched" style="color: red">Please pick a date with future dates.</span>
+    <br><br>
+
+    <label>Time:</label><br>
+    <h5>Please pick a time between 8AM and 5PM</h5>
+    <input 
+    type="time"
+    name="time"
+    min="08:00:00"
+    max="17:00:00"
+    required
+    [(ngModel)]="appointment.time"
+    #time="ngModel">
+    <span *ngIf="time.invalid && time.touched" style="color: red">Please pick a time within the range.</span>
+    <br><br>
+
+    <label>Complain:</label>
+    <textarea 
+    name="complain" 
+    id="" 
+    cols="50" 
+    rows="10"
+    required
+    minlength="10"
+    [(ngModel)]="appointment.complain"
+    #complain="ngModel">
+    </textarea>
+    <span *ngIf="complain.invalid && complain.touched" style="color: red">Please include your complains for your appointment. With at least 10 characters.</span>
+    <br><br>
+
+    <input type="submit" value="Add Appointment" class="add" [disabled]="formValidation.invalid">
+  </form>
+  <br><br>
+
+  <button><a [routerLink]="['/']">Cancel</a></button>
+</div>

@@ -1,0 +1,28 @@
+<div>
+  <header>
+    <a href="/">Logout</a>
+  </header>
+
+  <h1>Doctor's Appointments</h1>
+
+  <label>Search:</label>
+  <input type="text" [(ngModel)]="searchTerms">
+
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Patient Name</th>
+      <th>Complain</th>
+    </tr>
+    <tr *ngFor="let x of appointmentList | search: searchTerms">
+      <td>{{ x.date | date: 'longDate' }}</td>
+      <td>{{ x.time }}</td>
+      <td>{{ x.patient }}</td>
+      <td>{{ x.complain }}      <a [routerLink]="['/']" *ngIf="x.patient == currentUser" (click)="cancelApp(x._id)">Cancel</a></td>
+    </tr>
+  </table>
+  <br><br>
+
+  <button><a [routerLink]="['/new_appointment']" class="add">Add New Appointment</a></button>
+</div>
